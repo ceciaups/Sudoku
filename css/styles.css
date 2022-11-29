@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/********************************************************************
+ * TABLE OF CONTENTS
+ * ===================
+ * 1. GENERAL STYLES
+ * 2. SUDOKU STYLES
+ * 3. BUTTON STYLES
+ * ===================
+ ********************************************************************/
+
+/* 1. GENERAL STYLES */
+html {
+  box-sizing: border-box;
+  background-color: var(--white);
+  color: var(--blue-500);
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+}
+body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1em;
+}
+h1 {
+  font-size: var(--size-l);
+  padding-top: 0.5em;
+}
+:root {
+  --size-l: 36px;
+  --size-m: 22px;
+  --size-s: 14px;
+  --red: #e63946;
+  --white: #f1faee;
+  --blue-000: #a8dadc;
+  --blue-100: #97c5cf;
+  --blue-200: #76aac2;
+  --blue-300: #457b9d;
+  --blue-400: #31587A;
+  --blue-500: #1d3557;
+}
+
+/* 2. SUDOKU STYLES */
+#sudoku-container {
+  font-size: var(--size-m);
+  display: grid;
+  grid-template-columns: repeat(3, calc(4em + 2px));
+  grid-template-rows: repeat(3, calc(4em + 2px));
+  width: calc(12em + 8px);
+  border: 1px solid var(--blue-500);
+}
+.sudoku-box {
+  color: var(--blue-300);
+  font-size: var(--size-m);
+  display: grid;
+  grid-template-columns: repeat(3, 1.333em);
+  grid-template-rows: repeat(3, 1.333em);
+  width: calc(4em + 2px);
+  height: calc(4em + 2px);
+  border: 1px solid var(--blue-500);
+}
+.sudoku-input {
+  color: var(--blue-300);
+  text-align: center;
+  font-size: var(--size-m);
+  width: 1.333em;
+  height: 1.333em;
+}
+.sudoku-input:focus {
+  outline: none;
+  background-color: var(--blue-000);
+}
+
+/* 3. BUTTON STYLES */
+.button {
+  cursor: pointer;
+  background-color: var(--blue-000);
+  border-radius: 3px;
+  border: 1px solid var(--blue-500);
+  box-shadow: var(--white) 0 1px 0 0 inset;
+  display: inline-block;
+  font-size: var(--size-s);
+  outline: none;
+  padding: 0.5em 1em;
+  text-align: center;
+  text-decoration: none;
+}
+.button:hover,
+.button:focus {
+  background-color: var(--blue-100);
+}
+.button:active {
+  background-color: var(--blue-200);
+  box-shadow: none;
+}
