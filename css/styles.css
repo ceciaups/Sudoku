@@ -72,12 +72,19 @@ h1 {
   width: 1.333em;
   height: 1.333em;
 }
+.sudoku-input::placeholder {
+  color: var(--blue-500);
+
+}
 .sudoku-input:focus {
   outline: none;
   background-color: var(--blue-000);
 }
 
 /* 3. BUTTON STYLES */
+#check-message {
+  color: var(--blue-300);
+}
 .button {
   cursor: pointer;
   background-color: var(--blue-000);
