@@ -29,8 +29,8 @@ h1 {
 }
 :root {
   --size-l: 36px;
-  --size-m: 28px;
-  --size-s: 14px;
+  --size-m: 24px;
+  --size-s: 16px;
   --red: #e63946;
   --white: #f1faee;
   --blue-000: #a8dadc;
@@ -62,7 +62,14 @@ h1 {
   gap: 1em;
 }
 #check-message {
+  font-size: var(--size-s);
   color: var(--blue-300);
+  grid-column: 1;
+  grid-row: 1;
+}
+#timer {
+  padding: 0 1em;
+  justify-self: end;
   grid-column: 1;
   grid-row: 1;
 }

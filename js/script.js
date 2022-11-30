@@ -5,10 +5,14 @@ window.onload = function() {
   const sudokuSize = sudokuBoxSize * sudokuBoxSize;
   const quiz = "004300209005009001070060043006002087190007400050083000600000105003508690042910300";
   const solution = "864371259325849761971265843436192587198657432257483916689734125713528694542916378";
+  var time = 0;
+  var timer;
 
   var startPage = document.getElementById("start-page");
-  var sudokuContainer = document.getElementById("sudoku");
+  var sudoku = document.getElementById("sudoku");
   var checkMsg = document.getElementById("check-message");
+  var timerMin = document.getElementById("timer-min");
+  var timerSec = document.getElementById("timer-sec");
   var btnStart = document.getElementById("button-start");
   var btnCheck = document.getElementById("button-check");
   
@@ -35,13 +39,13 @@ window.onload = function() {
     
         sudokuBox.appendChild(sudokuInput);
       }
-      sudokuContainer.appendChild(sudokuBox);
+      sudoku.appendChild(sudokuBox);
     }
 
     // Debug mode
     // for (let i=0; i < sudokuBoxSize; i++) {
     //   for (let j=0; j < sudokuBoxSize; j++) {
-    //     let sudokuInput = sudokuContainer.childNodes[i].childNodes[j];
+    //     let sudokuInput = sudoku.childNodes[i].childNodes[j];
     //     if (sudokuInput.placeholder == 0 && sudokuInput.value == 0) {
     //       let number = findNumber(i, j, solution);
     //       sudokuInput.value = number;
@@ -50,6 +54,7 @@ window.onload = function() {
     // }
     
     startPage.style.zIndex = -1;
+    timer = setInterval(displayTime, 1000);
   }
 
   function checkSudoku() {
@@ -57,7 +62,7 @@ window.onload = function() {
     let correctInput = 0;
     for (let i=0; i < sudokuBoxSize; i++) {
       for (let j=0; j < sudokuBoxSize; j++) {
-        let sudokuInput = sudokuContainer.childNodes[i].childNodes[j];
+        let sudokuInput = sudoku.childNodes[i].childNodes[j];
         if (sudokuInput.value != 0) {
           let number = findNumber(i, j, solution);
           if (sudokuInput.value != number)
@@ -70,8 +75,13 @@ window.onload = function() {
       }
     }
     if (correctInput == sudokuSize) {
+      var sudokuInput = document.querySelectorAll(".sudoku-input");
+      sudokuInput.forEach(element => {
+        element.readOnly = true;
+      });
+      clearInterval(timer);
       checkMsg.style.color = "var(--blue-300)";
-      checkMsg.innerHTML = "You have completed the Sudoku!";
+      checkMsg.innerHTML = "You have completed the Sudoku in " + Math.floor(time/60) % 60 + " min and " + time % 60 + " sec!";
     }
     else if (wrongInput == 0) {
       checkMsg.style.color = "var(--blue-300)";
@@ -81,6 +91,19 @@ window.onload = function() {
       checkMsg.style.color = "var(--red)";
       checkMsg.innerHTML = "You have " + wrongInput + " wrong input!";
     }
+  }
+
+  function displayTime() {
+    time++;
+		
+		if (time/60 % 60 < 10)
+			timerMin.innerHTML = "0" + Math.floor(time/60 % 60) + ":";
+		else
+			timerMin.innerHTML = Math.floor(time/60  % 60) + ":";
+		if (time % 60 < 10)
+			timerSec.innerHTML = "0" + time % 60;
+		else
+			timerSec.innerHTML = time % 60;
   }
 
   btnStart.onclick = genSudoku;
