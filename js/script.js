@@ -106,12 +106,12 @@ window.onload = function() {
 			timerSec.innerHTML = time % 60;
   }
 
+  function findNumber(i, j, array) {
+    return array[Math.floor(j / 3) * 9 + Math.floor(i / 3) * 27 + j % 3 + i % 3 * 3];
+  }
+
   btnStart.onclick = genSudoku;
   btnCheck.onclick = checkSudoku;
-}
-
-function findNumber(i, j, array) {
-  return array[Math.floor(j / 3) * 9 + Math.floor(i / 3) * 27 + j % 3 + i % 3 * 3];
 }
 
 // function readTextFile(file)

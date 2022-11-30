@@ -45,7 +45,7 @@ h1 {
 #start-page {
   display: grid;
   place-items: center;
-  background: var(--white);
+  background: #f1faee7f;
   height: 100%;
   width: 100%;
   grid-column: 1;
