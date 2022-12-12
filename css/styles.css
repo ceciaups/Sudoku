@@ -40,6 +40,9 @@ h1 {
   --blue-400: #31587A;
   --blue-500: #1d3557;
 }
+#csv {
+  display: none;
+}
 
 /* 2. START PAGE STYLES */
 #start-page {
@@ -55,6 +58,8 @@ h1 {
 
 /* 3. SUDOKU PAGE STYLES */
 #sudoku-container {
+  max-width: 574px;
+  margin: auto;
   top: 0;
   left: 0;
   display: grid;
@@ -84,6 +89,10 @@ h1 {
   grid-column: 1;
   grid-row: 2;
 }
+/* #sudoku * {
+
+  visibility: hidden;
+} */
 .sudoku-box {
   color: var(--blue-300);
   font-size: var(--size-m);
@@ -109,9 +118,11 @@ h1 {
   outline: none;
   background-color: var(--blue-000);
 }
-#button-check {
+.button-container {
   grid-column: 1;
   grid-row: 3;
+  display: flex;
+  gap: 1em;
 }
 .button {
   cursor: pointer;
@@ -133,4 +144,19 @@ h1 {
 .button:active {
   background-color: var(--blue-200);
   box-shadow: none;
+}
+
+/* 4. NEW GAME PAGE STYLES */
+#new-game {
+  visibility: hidden;
+  grid-column: 1;
+  grid-row: 1/4;
+  padding: 1em;
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+  place-items: center;
+  text-align: center;
+  width: calc(18em + 8px);
+  z-index: 1;
 }
