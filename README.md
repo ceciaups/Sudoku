@@ -8,6 +8,6 @@ You can play Sudoku without advertisement!
 - Check: return the number of wrong inputs
 
 ## Links
-- HTML: [/index.html](Sudoku/index.html)
-- CSS: [/css/styles.css](Sudoku/css/styles.css)
-- JS: [/js/script.js](Sudoku/js/script.js)
+- HTML: [/index.html](index.html)
+- CSS: [/css/styles.css](css/styles.css)
+- JS: [/js/script.js](js/script.js)
