@@ -25,7 +25,8 @@ window.onload = function() {
   var timerMin = document.getElementById("timer-min");
   var timerSec = document.getElementById("timer-sec");
   var btnStart = document.getElementById("button-start");
-  var btnNew = document.getElementById("button-new");
+  var btnNew = document.getElementById("button-new");;
+  var btnPause = document.getElementById("button-pause");
   var btnCheck = document.getElementById("button-check");
   var btnNewYes = document.getElementById("button-new-confirm");
   var btnNewNo = document.getElementById("button-new-cancel");
@@ -89,6 +90,16 @@ window.onload = function() {
     btnNewNo.addEventListener("click", resumeGame, { once: true });
   }
 
+  function pauseGame() {
+    startPage.style.visibility = "visible";
+    for (const child of sudoku.children) {
+      child.style.visibility = "hidden";
+    }
+    clearInterval(timer);
+    btnStart.innerHTML = "Resume";
+    btnStart.addEventListener("click", resumeGame, { once: true });
+  }
+
   function startNewGame() {
     newGame.style.visibility = "hidden";
     for (const child of sudoku.children) {
@@ -100,15 +111,17 @@ window.onload = function() {
     time = 0;
     checkMsg.style.color = "var(--blue-300)";
     genSudoku();
-    btnNewNo.removeEventListener("clicked", resumeGame)
+    btnNewNo.removeEventListener("clicked", resumeGame);
   }
 
   function resumeGame() {
+    startPage.style.visibility = "hidden";
     newGame.style.visibility = "hidden";
     for (const child of sudoku.children) {
       child.style.visibility = "visible";
     }
     timer = setInterval(displayTime, 1000);
+    btnNewYes.removeEventListener("clicked", startNewGame);
   }
 
   function checkSudoku() {
@@ -164,7 +177,8 @@ window.onload = function() {
     return array[Math.floor(j / 3) * 9 + Math.floor(i / 3) * 27 + j % 3 + i % 3 * 3];
   }
 
-  btnStart.onclick = startGame;
+  btnStart.addEventListener("click", startGame, { once: true });
   btnNew.onclick = confirmNewGame;
+  btnPause.onclick = pauseGame;
   btnCheck.onclick = checkSudoku;
 }
