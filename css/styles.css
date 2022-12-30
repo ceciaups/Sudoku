@@ -6,6 +6,7 @@
  * 1. GENERAL STYLES
  * 2. HOME PAGE STYLES
  * 3. SUDOKU PAGE STYLES
+ * 4. NEW GAME PAGE STYLES
  * ===================
  ********************************************************************/
 
@@ -89,10 +90,6 @@ h1 {
   grid-column: 1;
   grid-row: 2;
 }
-/* #sudoku * {
-
-  visibility: hidden;
-} */
 .sudoku-box {
   color: var(--blue-300);
   font-size: var(--size-m);

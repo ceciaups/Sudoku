@@ -1,7 +1,9 @@
 # Sudoku
 You can play Sudoku without advertisement! 
 ![Sudoku page](https://raw.githubusercontent.com/ceciaups/Sudoku/master/images/Sudoku.png)
+
 ## Features
+- 1 million Sudoku Puzzles to play
 - Timer
 - New game: start a new game with a puzzle randomly chosen from database
 - Pause: stop the timer for a break
@@ -11,3 +13,4 @@ You can play Sudoku without advertisement!
 - HTML: [/index.html](index.html)
 - CSS: [/css/styles.css](css/styles.css)
 - JS: [/js/script.js](js/script.js)
+- Database: [/csv/sudoku.csv](csv/sudoku.csv)
