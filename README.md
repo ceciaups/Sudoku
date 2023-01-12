@@ -1,7 +1,6 @@
 # Sudoku
-Visit here: https://sudoku.ceciaups.com/
-
-You can play Sudoku without advertisement!
+- Visit here: https://sudoku.ceciaups.com/
+- You can play Sudoku without advertisement!
 ![Sudoku page](https://raw.githubusercontent.com/ceciaups/Sudoku/master/images/Sudoku.png)
 
 ## Features
