@@ -17,6 +17,7 @@ https.get(dbUrl, (res) => {
   })
   .on("end", () => {
     console.log("Read csv data done!");
+    console.log(dbData);
   })
 });
 
