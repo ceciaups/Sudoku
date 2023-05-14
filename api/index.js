@@ -27,7 +27,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/sudokuDB/:id", (req, res) => {
-  res.send(dbData[req.params.id]);
+  res.send(JSON.stringify(dbData[req.params.id]));
 })
 
 const httpServer = http.createServer(app);
