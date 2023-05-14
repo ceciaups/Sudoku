@@ -36,4 +36,4 @@ db.pipe(parse({ delimiter: ",", from_line: 2 }))
   console.log("Read csv data done!");
 })
 
-export default app;
+module.exports = app;
