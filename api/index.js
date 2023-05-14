@@ -1,12 +1,9 @@
-// const bodyParser = require("body-parser");
 const express = require("express");
 const https = require("https");
 const path = require("path");
-const fs = require("fs");
 const { parse } = require("csv-parse");
 const app = express();
 var dbUrl = "https://media.githubusercontent.com/media/ceciaups/Sudoku/master/csv/sudoku.csv";
-var db =  fs.createReadStream(__dirname + "/../csv/sudoku.csv");
 const dbData = [];
 
 https.get(dbUrl, (res) => {
@@ -29,7 +26,6 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/sudokuDB/:id", (req, res) => {
-  console.log(dbData);
   res.send(dbData[req.params.id]);
 })
 
