@@ -1,4 +1,4 @@
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const express = require("express");
 const http = require("http");
 const path = require("path");
@@ -12,6 +12,10 @@ app.use(express.static(__dirname + "/../"));
 
 app.get("/api", (req, res) => {
   res.sendFile(__dirname + "/../index.html");
+});
+
+app.get("/api/testing", (req, res) => {
+  res.send("testing");
 });
 
 app.get("/api/sudokuDB/:id", (req, res) => {
@@ -37,3 +41,4 @@ db.pipe(parse({ delimiter: ",", from_line: 2 }))
 })
 
 module.exports = app;
+module.exports = db;
