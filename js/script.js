@@ -26,7 +26,7 @@ window.onload = function() {
   function getSudoku(callback) {
 
     sudokuID = Math.floor(Math.random() * dbSize);
-    var url = "/sudokuDB/" + sudokuID;
+    var url = "/api/sudokuDB/" + sudokuID;
     
     let xhr = new XMLHttpRequest();
 
