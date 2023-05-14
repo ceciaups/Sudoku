@@ -1,24 +1,26 @@
 // const bodyParser = require("body-parser");
 const express = require("express");
-const http = require("http");
+const https = require("https");
 const path = require("path");
 const fs = require("fs");
 const { parse } = require("csv-parse");
 const app = express();
+var dbUrl = "https://media.githubusercontent.com/media/ceciaups/Sudoku/master/csv/sudoku.csv";
 var db =  fs.createReadStream(__dirname + "/../csv/sudoku.csv");
 const dbData = [];
 
-db.pipe(parse({ delimiter: ",", from_line: 2 }))
-
-.on("data", function (row) {
-  dbData.push(row);
-})
-.on("error", function (error) {
-  console.log(error.message);
-})
-.on("end", function () {
-  console.log("Read csv data done!");
-})
+https.get(dbUrl, (res) => {
+  res.pipe(parse({ delimiter: ",", from_line: 2 }))
+  .on("data", (row) => {
+    dbData.push(row);
+  })
+  .on("error", (error) => {
+    console.log(error.message);
+  })
+  .on("end", () => {
+    console.log("Read csv data done!");
+  })
+});
 
 app.use(express.static(__dirname + "/../"));
 
