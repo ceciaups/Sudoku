@@ -26,8 +26,12 @@ app.get("/api", (req, res) => {
   res.sendFile(__dirname + "/../index.html");
 });
 
-app.get("/api/sudokuDB/:id", (req, res) => {
-  res.send(JSON.stringify(dbData[req.params.id]));
+app.get("/api/sudokuDB/:id", async (req, res) => {
+  var data = {
+    "quiz": dbData[req.params.id][0],
+    "solution": dbData[req.params.id][1]
+  }
+  res.send(data);
 })
 
 const httpServer = http.createServer(app);
