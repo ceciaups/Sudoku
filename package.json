@@ -2,7 +2,7 @@
   "name": "sudoku",
   "version": "1.0.0",
   "description": "Sudoku Application",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
