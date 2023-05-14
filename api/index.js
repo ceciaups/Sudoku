@@ -8,26 +8,6 @@ const app = express();
 var db =  fs.createReadStream(__dirname + "/../csv/sudoku.csv");
 const dbData = [];
 
-app.use(express.static(__dirname + "/../"));
-
-app.get("/api", (req, res) => {
-  res.sendFile(__dirname + "/../index.html");
-});
-
-app.get("/api/testing", (req, res) => {
-  res.send("testing");
-});
-
-app.get("/api/sudokuDB/:id", (req, res) => {
-  res.send(dbData[req.params.id]);
-})
-
-const httpServer = http.createServer(app);
-
-httpServer.listen(80, function() {
-  console.log("hello world");
-})
-
 db.pipe(parse({ delimiter: ",", from_line: 2 }))
 
 .on("data", function (row) {
@@ -38,6 +18,23 @@ db.pipe(parse({ delimiter: ",", from_line: 2 }))
 })
 .on("end", function () {
   console.log("Read csv data done!");
+})
+
+app.use(express.static(__dirname + "/../"));
+
+app.get("/api", (req, res) => {
+  res.sendFile(__dirname + "/../index.html");
+});
+
+app.get("/api/sudokuDB/:id", (req, res) => {
+  console.log(dbData);
+  res.send(dbData[req.params.id]);
+})
+
+const httpServer = http.createServer(app);
+
+httpServer.listen(80, function() {
+  console.log("hello world");
 })
 
 module.exports = app;
