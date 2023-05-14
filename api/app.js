@@ -41,4 +41,3 @@ db.pipe(parse({ delimiter: ",", from_line: 2 }))
 })
 
 module.exports = app;
-module.exports = db;
