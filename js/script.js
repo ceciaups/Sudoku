@@ -32,6 +32,7 @@ window.onload = function() {
 
     if (response.status === 200) {
       var data = await response.json();
+      console.log(data);
       quiz = data[0];
       solution = data[1];
       callback();
