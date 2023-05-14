@@ -39,7 +39,7 @@ window.onload = function() {
     }
     else {
       location.innerHTML = "API call was unsuccessful";
-      console.log(xhr.status);
+      console.log(response.status);
     }
 
     // let xhr = new XMLHttpRequest();

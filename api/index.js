@@ -27,6 +27,8 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/sudokuDB/:id", async (req, res) => {
+  console.log(dbData[req.params.id]);
+
   var data = {
     "quiz": dbData[req.params.id][0],
     "solution": dbData[req.params.id][1]
