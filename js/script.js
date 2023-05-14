@@ -35,6 +35,8 @@ window.onload = function() {
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
+          console.log(xhr);
+          console.log(xhr.response);
           const data = xhr.response;
           quiz = data[0];
           solution = data[1];
