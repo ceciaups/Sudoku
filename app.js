@@ -5,13 +5,13 @@ const path = require("path");
 const fs = require("fs");
 const { parse } = require("csv-parse");
 const app = express();
-var db =  fs.createReadStream(__dirname + "/../csv/sudoku.csv");
+var db =  fs.createReadStream(__dirname + "/csv/sudoku.csv");
 const dbData = [];
 
-app.use(express.static(__dirname + "/../"));
+app.use(express.static(__dirname + "/"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/../index.html");
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.get("/sudokuDB/:id", (req, res) => {
@@ -35,3 +35,5 @@ db.pipe(parse({ delimiter: ",", from_line: 2 }))
 .on("end", function () {
   console.log("Read csv data done!");
 })
+
+export default app;
