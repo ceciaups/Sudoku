@@ -23,35 +23,48 @@ window.onload = function() {
   var btnNewYes = document.getElementById("button-new-confirm");
   var btnNewNo = document.getElementById("button-new-cancel");
   
-  function getSudoku(callback) {
+  async function getSudoku(callback) {
 
     sudokuID = Math.floor(Math.random() * dbSize);
     var url = "/api/sudokuDB/" + sudokuID;
     
-    let xhr = new XMLHttpRequest();
+    var response = await fetch(url);
 
-    xhr.callback = callback;
+    console.log(response);
 
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          console.log(xhr);
-          console.log(xhr.response);
-          const data = xhr.response;
-          quiz = data[0];
-          solution = data[1];
-        }
-        else {
-          location.innerHTML = "API call was unsuccessful";
-          console.log(xhr.status);
-        }
-      }
+    if (response.status === 200) {
+     const data = await response.json();
+      quiz = data[0];
+      solution = data[1];
+      callback();
+    }
+    else {
+      location.innerHTML = "API call was unsuccessful";
+      console.log(xhr.status);
     }
 
-    xhr.onload = xhr.callback;
-    xhr.open("GET", url, true);
-    xhr.responseType = "json";
-    xhr.send();
+    // let xhr = new XMLHttpRequest();
+
+    // xhr.callback = callback;
+
+    // xhr.onreadystatechange = function() {
+    //   if (xhr.readyState === 4) {
+    //     if (xhr.status === 200) {
+    //       const data = xhr.response;
+    //       quiz = data[0];
+    //       solution = data[1];
+    //     }
+    //     else {
+    //       location.innerHTML = "API call was unsuccessful";
+    //       console.log(xhr.status);
+    //     }
+    //   }
+    // }
+
+    // xhr.onload = xhr.callback;
+    // xhr.open("GET", url, true);
+    // xhr.responseType = "json";
+    // xhr.send();
   }
 
   function genSudoku() {
