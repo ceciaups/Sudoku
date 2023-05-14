@@ -30,13 +30,8 @@ window.onload = function() {
     
     var response = await fetch(url);
 
-    console.log(response);
-    console.log(response.status);
-    console.log(response.status === 200);
-
     if (response.status === 200) {
       var data = await response.json();
-      console.log(data);
       quiz = data[0];
       solution = data[1];
       callback();
