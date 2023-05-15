@@ -22,11 +22,11 @@ https.get(dbUrl, (res) => {
 
 app.use(express.static(__dirname + "/../"));
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/../index.html");
 });
 
-app.get("/api/sudokuDB/:id", (req, res) => {
+app.get("/sudokuDB/:id", (req, res) => {
   var data = {
     "quiz": dbData[req.params.id][0],
     "solution": dbData[req.params.id][1]
