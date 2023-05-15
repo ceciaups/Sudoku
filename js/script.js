@@ -32,7 +32,6 @@ window.onload = function() {
 
     if (response.status === 200) {
       var data = await response.json();
-      console.log(data);
       quiz = data.quiz;
       solution = data.solution;
       callback();
@@ -41,29 +40,6 @@ window.onload = function() {
       location.innerHTML = "API call was unsuccessful";
       console.log(response.status);
     }
-
-    // let xhr = new XMLHttpRequest();
-
-    // xhr.callback = callback;
-
-    // xhr.onreadystatechange = function() {
-    //   if (xhr.readyState === 4) {
-    //     if (xhr.status === 200) {
-    //       const data = xhr.response;
-    //       quiz = data[0];
-    //       solution = data[1];
-    //     }
-    //     else {
-    //       location.innerHTML = "API call was unsuccessful";
-    //       console.log(xhr.status);
-    //     }
-    //   }
-    // }
-
-    // xhr.onload = xhr.callback;
-    // xhr.open("GET", url, true);
-    // xhr.responseType = "json";
-    // xhr.send();
   }
 
   function genSudoku() {
