@@ -1,10 +1,24 @@
 const express = require("express");
 const http = require("http");
+const https = require("https");
 const path = require("path");
-const fs = require("fs");
 const { parse } = require("csv-parse");
-var db = fs.createReadStream(__dirname + "/../csv/sudoku.csv");
 const app = express();
+var dbUrl = "https://media.githubusercontent.com/media/ceciaups/Sudoku/master/csv/sudoku.csv";
+const dbData = [];
+
+https.get(dbUrl, (res) => {
+  res.pipe(parse({ delimiter: ",", from_line: 2 }))
+  .on("data", (row) => {
+    dbData.push(row);
+  })
+  .on("error", (error) => {
+    console.log(error.message);
+  })
+  .on("end", () => {
+    console.log("Read csv data done!");
+  })
+});
 
 app.use(express.static(__dirname + "/../"));
 
@@ -13,25 +27,11 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/sudokuDB/:id", (req, res) => {
-  const dbData = [];
-  const number = Number(req.params.id) + 1;
-
-  db.pipe(parse({ delimiter: ",", from_line: number , to_line: number }))
-
-  .on("data", function (row) {
-    dbData.push(row);
-  })
-  .on("error", function (error) {
-    console.log(error.message);
-  })
-  .on("end", function () {
-    console.log("Read csv data done!");
-    var data = {
-      "quiz": dbData[0][0],
-      "solution": dbData[0][1]
-    }
-    res.send(data);
-  })
+  var data = {
+    "quiz": dbData[req.params.id][0],
+    "solution": dbData[req.params.id][1]
+  }
+  res.send(data);
 })
 
 const httpServer = http.createServer(app);
