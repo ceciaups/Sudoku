@@ -17,7 +17,7 @@ https.get(dbUrl, (res) => {
   })
   .on("end", () => {
     console.log("Read csv data done!");
-    console.log(dbData);
+    console.log(dbData.length);
   })
 });
 
@@ -28,7 +28,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/api/sudokuDB/:id", (req, res) => {
-  console.log(dbData[req.params.id]);
+  console.log(dbData.length);
 
   var data = {
     "quiz": dbData[req.params.id][0],
