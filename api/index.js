@@ -27,7 +27,7 @@ app.get("/api", (req, res) => {
   res.sendFile(__dirname + "/../index.html");
 });
 
-app.get("/api/sudokuDB/:id", async (req, res) => {
+app.get("/api/sudokuDB/:id", (req, res) => {
   console.log(dbData[req.params.id]);
 
   var data = {
