@@ -5,7 +5,7 @@ const path = require("path");
 const fs = require("fs");
 const { parse } = require("csv-parse");
 const app = express();
-const CHUNK_SIZE = 10000000;
+const CHUNK_SIZE = 1000000;
 const dbData = [];
 // var dbUrl = "https://media.githubusercontent.com/media/ceciaups/Sudoku/master/csv/sudoku.csv";
 
