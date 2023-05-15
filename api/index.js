@@ -14,9 +14,10 @@ app.get("/", (req, res) => {
 
 app.get("/sudokuDB/:id", (req, res) => {
   const dbData = [];
+  const number = Number(req.params.id) + 1;
 
-  https.get(dbUrl, (res) => {
-    res.pipe(parse({ delimiter: ",", from_line: Number(req.params.id) + 1, to_line: Number(req.params.id) + 1 }))
+  https.get(dbUrl, (res_db) => {
+    res_db.pipe(parse({ delimiter: ",", from_line: number, to_line: number }))
     .on("data", (row) => {
       dbData.push(row);
     })
@@ -24,16 +25,15 @@ app.get("/sudokuDB/:id", (req, res) => {
       console.log(error.message);
     })
     .on("end", () => {
-      console.log(dbData);
       console.log("Read csv data done!");
+
+      var data = {
+        "quiz": dbData[0][0],
+        "solution": dbData[0][1]
+      }
+      res.send(data);
     })
   });
-
-  var data = {
-    "quiz": dbData[0][0],
-    "solution": dbData[0][1]
-  }
-  res.send(data);
 })
 
 const httpServer = http.createServer(app);
