@@ -17,9 +17,9 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/../index.html");
 });
 
-app.get("/sudokus", async (req, res) => {
-  let result = sudokus.importDB(req, res);
-});
+// app.get("/sudokus", async (req, res) => {
+//   let result = sudokus.importDB(req, res);
+// });
 
 app.get("/sudokuDB/:id", async (req, res) => {
   sudokus.getSudoku(req, res);
