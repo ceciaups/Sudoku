@@ -2,14 +2,11 @@ const express = require("express");
 const http = require("http");
 const https = require("https");
 const path = require("path");
-const fs = require("fs");
-const { parse } = require("csv-parse");
 const app = express();
-const CHUNK_SIZE = 1000000;
-const dbData = [];
+const { db } =  require('@vercel/postgres');
+const dotenv = require("dotenv");
 
-const sudokus = require("./sudokus");
-// var dbUrl = "https://media.githubusercontent.com/media/ceciaups/Sudoku/master/csv/sudoku.csv";
+dotenv.config();
 
 app.use(express.static(__dirname + "/../"));
 
@@ -17,12 +14,11 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/../index.html");
 });
 
-app.get("/sudokus", async (req, res) => {
-  let result = sudokus.importDB(req, res);
-});
-
 app.get("/sudokuDB/:id", async (req, res) => {
-  sudokus.getSudoku(req, res);
+  const client = await db.connect();
+  const query = await client.sql`SELECT * FROM Sudokus WHERE id = ${req.params.id};`;
+  const sudoku = query.rows[0];
+  return res.status(200).send(sudoku);
 })
 
 const httpServer = http.createServer(app);
