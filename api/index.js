@@ -7,6 +7,8 @@ const { parse } = require("csv-parse");
 const app = express();
 const CHUNK_SIZE = 1000000;
 const dbData = [];
+
+const sudokus = require("./sudokus");
 // var dbUrl = "https://media.githubusercontent.com/media/ceciaups/Sudoku/master/csv/sudoku.csv";
 
 app.use(express.static(__dirname + "/../"));
@@ -15,63 +17,12 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/../index.html");
 });
 
-async function readDB() {
-  const stream =  fs.createReadStream(__dirname + "/../csv/sudoku.csv", { highWaterMark: CHUNK_SIZE });
-
-  for await(const db of stream) {
-    let str = (db.toString()).split("\n");
-    console.log(str.length);
-    str.forEach(function(line, index) {
-      if (index == 0 && dbData.length) {
-        let last = dbData.pop();
-        dbData.push(last.concat(line));
-      }
-      else {
-        dbData.push(line);
-      }
-    });
-  }
-}
-
-readDB();
+app.get("/sudokus", async (req, res) => {
+  let result = sudokus.importDB(req, res);
+});
 
 app.get("/sudokuDB/:id", async (req, res) => {
-
-  // var dbData = [];
-
-  // const nthline = require("nthline"),
-  //   filePath = __dirname + "/../csv/sudoku.csv",
-  //   rowIndex = Number(req.params.id);
-
-  // dbData = (await nthline(rowIndex, filePath)).split(",");
-  
-  let split = dbData[req.params.id].split(",");
-
-  let data = {
-    "quiz": split[0],
-    "solution": split[1]
-  }
-
-  res.send(data);
-
-  // https.get(dbUrl, (res_db) => {
-  //   res_db.pipe(parse({ delimiter: ",", from_line: number, to_line: number }))
-  //   .on("data", (row) => {
-  //     dbData.push(row);
-  //   })
-  //   .on("error", (error) => {
-  //     console.log(error.message);
-  //   })
-  //   .on("end", () => {
-  //     console.log("Read csv data done!");
-
-  //     var data = {
-  //       "quiz": dbData[0][0],
-  //       "solution": dbData[0][1]
-  //     }
-  //     res.send(data);
-  //   })
-  // });
+  sudokus.getSudoku(req, res);
 })
 
 const httpServer = http.createServer(app);

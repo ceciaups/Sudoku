@@ -26,7 +26,7 @@ window.onload = function() {
   async function getSudoku(callback) {
 
     sudokuID = Math.floor(Math.random() * dbSize);
-    var url = "/sudokuDB/" + sudokuID;
+    var url = "/sudokuDB/" + 1;
     
     var response = await fetch(url);
 
