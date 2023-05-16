@@ -14,4 +14,4 @@
 - HTML: [/index.html](index.html)
 - CSS: [/css/styles.css](css/styles.css)
 - JS: [/js/script.js](js/script.js)
-- Database: [/csv/sudoku.csv](csv/sudoku.csv)
+- Postgres in Vercel

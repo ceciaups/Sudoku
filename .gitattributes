@@ -1,1 +1,2 @@
 csv/sudoku.csv filter=lfs diff=lfs merge=lfs -text
+/node_modules

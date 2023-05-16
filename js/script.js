@@ -23,33 +23,23 @@ window.onload = function() {
   var btnNewYes = document.getElementById("button-new-confirm");
   var btnNewNo = document.getElementById("button-new-cancel");
   
-  function getSudoku(callback) {
+  async function getSudoku(callback) {
 
     sudokuID = Math.floor(Math.random() * dbSize);
     var url = "/sudokuDB/" + sudokuID;
     
-    let xhr = new XMLHttpRequest();
+    var response = await fetch(url);
 
-    xhr.callback = callback;
-
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          const data = xhr.response;
-          quiz = data[0];
-          solution = data[1];
-        }
-        else {
-          location.innerHTML = "API call was unsuccessful";
-          console.log(xhr.status);
-        }
-      }
+    if (response.status === 200) {
+      var data = await response.json();
+      quiz = data.quiz;
+      solution = data.solution;
+      callback();
     }
-
-    xhr.onload = xhr.callback;
-    xhr.open("GET", url, true);
-    xhr.responseType = "json";
-    xhr.send();
+    else {
+      location.innerHTML = "API call was unsuccessful";
+      console.log(response.status);
+    }
   }
 
   function genSudoku() {
