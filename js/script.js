@@ -55,6 +55,9 @@ window.onload = function() {
         let number = findNumber(i, j, quiz);
 
         let sudokuInput = document.createElement("input");
+        sudokuInput.addEventListener("input", function() {
+          this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1').charAt(0);
+        });
         
         if (number == 0) {
           sudokuInput.classList.add("sudoku-input");
@@ -88,6 +91,8 @@ window.onload = function() {
     btnStart.style.display = "none";
     loading.style.display = "block";
     await getSudoku(genSudoku);
+    loading.style.display = "none";
+    btnStart.style.display = "block";
     startPage.style.visibility = "hidden";
     enableButton();
   }
@@ -114,7 +119,7 @@ window.onload = function() {
     btnStart.addEventListener("click", resumeGame, { once: true });
   }
 
-  function startNewGame() {
+  async function startNewGame() {
     enableButton();
     newGame.style.visibility = "hidden";
     for (const child of sudoku.children) {
@@ -125,7 +130,13 @@ window.onload = function() {
     timerSec.innerHTML = "00";
     time = 0;
     checkMsg.style.color = "var(--blue-300)";
-    getSudoku(genSudoku);
+    startPage.style.visibility = "visible";
+    btnStart.style.display = "none";
+    loading.style.display = "block";
+    await getSudoku(genSudoku);
+    loading.style.display = "none";
+    btnStart.style.display = "block";
+    startPage.style.visibility = "hidden";
     btnNewNo.removeEventListener("clicked", resumeGame);
   }
 
