@@ -56,6 +56,30 @@ h1 {
   grid-row: 1/4;
   z-index: 1;
 }
+#loading {
+  display: none;
+  width: 60px;
+  height: 60px;
+}
+#loading:after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 6px;
+  border-radius: 50%;
+  border: 5px solid var(--blue-400);
+  border-color: var(--blue-400) transparent var(--blue-400) transparent;
+  animation: loading-state 1.2s linear infinite;
+}
+@keyframes loading-state {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 /* 3. SUDOKU PAGE STYLES */
 #sudoku-container {

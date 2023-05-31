@@ -17,6 +17,7 @@ window.onload = function() {
   var timerMin = document.getElementById("timer-min");
   var timerSec = document.getElementById("timer-sec");
   var btnStart = document.getElementById("button-start");
+  var loading = document.getElementById("loading");
   var btnNew = document.getElementById("button-new");;
   var btnPause = document.getElementById("button-pause");
   var btnCheck = document.getElementById("button-check");
@@ -83,8 +84,10 @@ window.onload = function() {
     timer = setInterval(displayTime, 1000);
   }
 
-  function startGame() {
-    getSudoku(genSudoku);
+  async function startGame() {
+    btnStart.style.display = "none";
+    loading.style.display = "block";
+    await getSudoku(genSudoku);
     startPage.style.visibility = "hidden";
     enableButton();
   }
